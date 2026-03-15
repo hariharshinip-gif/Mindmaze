@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<title>Nearby Therapists</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="dashboard">
+
+<h2>Finding Nearby Licensed Therapists...</h2>
+<p>Please allow location access.</p>
+
+</div>
+
+<script>
+
+window.onload = function(){
+
+if(navigator.geolocation){
+
+navigator.geolocation.getCurrentPosition(function(position){
+
+let lat = position.coords.latitude;
+let lon = position.coords.longitude;
+
+let url = "https://www.google.com/maps/search/therapist/@" + lat + "," + lon + ",14z";
+
+window.location.href = url;  // Automatically opens Google Maps
+
+});
+
+}
+
+}
+
+</script>
+
+</body>
+
+</html>

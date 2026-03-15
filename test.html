@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Depression Screening Tool</title>
+
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="test-container">
+
+<h2>Depression Screening Tool (PHQ-9)</h2>
+
+<div id="questions"></div>
+
+<button class="submit-btn" onclick="submitTest()">Submit Test</button>
+
+<div id="result"></div>
+
+</div>
+
+<script>
+
+const questions = [
+"Little interest or pleasure in doing things?",
+"Feeling down, depressed, or hopeless?",
+"Trouble falling or staying asleep, or sleeping too much?",
+"Feeling tired or having little energy?",
+"Poor appetite or overeating?",
+"Feeling bad about yourself or that you are a failure?",
+"Trouble concentrating on things?",
+"Moving or speaking slowly or being restless?",
+"Thoughts that you would be better off dead or hurting yourself?"
+];
+
+const options = [
+"Not at all",
+"Several days",
+"More than half the days",
+"Nearly every day"
+];
+
+let responses = new Array(9).fill(null)
+
+let container = document.getElementById("questions")
+
+questions.forEach((q,index)=>{
+
+let div = document.createElement("div")
+div.className = "question-card"
+
+let html = `<p class="question-text">${index+1}. ${q}</p>`
+html += `<div class="options">`
+
+options.forEach((opt,value)=>{
+html += `<button class="option-btn" onclick="selectOption(${index},${value},this)">${opt}</button>`
+})
+
+html += `</div>`
+div.innerHTML = html
+
+container.appendChild(div)
+
+})
+
+function selectOption(qIndex,value,btn){
+
+responses[qIndex] = value
+
+let parent = btn.parentElement
+let buttons = parent.querySelectorAll("button")
+
+buttons.forEach(b => b.classList.remove("selected"))
+
+btn.classList.add("selected")
+
+}
+
+function submitTest(){
+
+if(responses.includes(null)){
+alert("Please answer all questions")
+return
+}
+
+fetch("/predict",{
+method:"POST",
+headers:{"Content-Type":"application/json"},
+body:JSON.stringify({responses:responses})
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+window.location.href = `/result?score=${data.score}&severity=${data.severity}`
+
+})
+
+}
+
+</script>
+
+</body>
+</html>

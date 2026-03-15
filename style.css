@@ -1,0 +1,352 @@
+/* ===== GLOBAL PAGE STYLE ===== */
+
+body{
+
+font-family: Arial, Helvetica, sans-serif;
+background:#f4efe8;
+margin:0;
+padding:0;
+color:#333;
+
+}
+
+
+/* ===== GENERAL CONTAINER ===== */
+
+.container{
+
+width:400px;
+margin:80px auto;
+background:#ffffff;
+padding:40px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+text-align:center;
+
+}
+
+
+/* ===== HEADINGS ===== */
+
+h1,h2,h3{
+
+color:#4a6fa5;
+margin-bottom:20px;
+
+}
+
+
+/* ===== INPUT FIELDS ===== */
+
+input{
+
+width:90%;
+padding:12px;
+margin:10px 0;
+border-radius:6px;
+border:1px solid #ccc;
+font-size:14px;
+
+}
+
+
+/* ===== BUTTONS ===== */
+
+button{
+
+background:#7fa8d8;
+color:white;
+border:none;
+padding:12px 20px;
+border-radius:6px;
+cursor:pointer;
+font-size:14px;
+transition:0.2s;
+
+}
+
+button:hover{
+
+background:#5d8fc7;
+
+}
+
+
+/* ===== LINKS ===== */
+
+a{
+
+color:#4a6fa5;
+text-decoration:none;
+
+}
+
+a:hover{
+
+text-decoration:underline;
+
+}
+
+
+/* ===== ERROR MESSAGE ===== */
+
+.error{
+
+color:red;
+font-size:14px;
+margin-top:10px;
+
+}
+
+
+/* ===== DASHBOARD PAGE ===== */
+
+.dashboard{
+
+width:900px;
+margin:40px auto;
+background:white;
+padding:40px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+
+}
+
+
+canvas{
+
+margin-top:20px;
+
+}
+
+
+/* ===== CHATBOT ===== */
+
+.chatbot{
+
+margin-top:40px;
+background:#f7f9fc;
+padding:20px;
+border-radius:10px;
+border:1px solid #d6e3f5;
+
+}
+
+
+#chatbox{
+
+height:220px;
+overflow-y:auto;
+border:1px solid #ccc;
+background:white;
+padding:10px;
+border-radius:5px;
+margin-bottom:10px;
+text-align:left;
+
+}
+
+
+#userInput{
+
+width:75%;
+padding:10px;
+
+}
+
+
+/* ===== TEST PAGE ===== */
+
+.test-container{
+
+width:850px;
+margin:40px auto;
+background:#f7f3ec;
+padding:40px;
+border-radius:10px;
+box-shadow:0 4px 15px rgba(0,0,0,0.1);
+text-align:left;
+
+}
+
+
+.test-container h2{
+
+color:#4a6fa5;
+margin-bottom:30px;
+
+}
+
+
+/* ===== QUESTION CARD ===== */
+
+.question-card{
+
+background:#ffffff;
+padding:20px;
+border-radius:8px;
+margin-bottom:20px;
+border-left:6px solid #a8c5e6;
+
+}
+
+
+.question-text{
+
+font-weight:600;
+margin-bottom:15px;
+
+}
+
+
+/* ===== OPTIONS ===== */
+
+.options{
+
+display:flex;
+flex-wrap:wrap;
+gap:10px;
+
+}
+
+
+.option-btn{
+
+background:#e8f0fa;
+border:none;
+padding:10px 15px;
+border-radius:6px;
+cursor:pointer;
+transition:0.2s;
+color:#333;
+
+}
+
+
+.option-btn:hover{
+
+background:#cfe1f7;
+
+}
+
+
+.option-btn.selected{
+
+background:#7fa8d8;
+color:white;
+
+}
+
+
+/* ===== SUBMIT BUTTON ===== */
+
+.submit-btn{
+
+background:#7fa8d8;
+color:white;
+border:none;
+padding:12px 25px;
+border-radius:6px;
+cursor:pointer;
+margin-top:20px;
+
+}
+
+.submit-btn:hover{
+
+background:#5d8fc7;
+
+}
+
+
+/* ===== RESULT BOX ===== */
+
+#result{
+
+margin-top:30px;
+padding:20px;
+background:#ffffff;
+border-radius:6px;
+border-left:6px solid #7fa8d8;
+
+}
+
+
+/* ===== MOBILE SUPPORT ===== */
+
+@media(max-width:900px){
+
+.dashboard{
+
+width:90%;
+
+}
+
+.test-container{
+
+width:90%;
+
+}
+
+.container{
+
+width:90%;
+
+}
+
+}
+
+/* CHAT WINDOW */
+
+.chat-window{
+
+display:none;
+margin-top:30px;
+background:#ffffff;
+padding:20px;
+border-radius:10px;
+border:1px solid #d6e3f5;
+
+}
+
+
+/* CHAT AREA */
+
+#chatbox{
+
+height:250px;
+overflow-y:auto;
+background:#f9f9f9;
+padding:10px;
+border-radius:6px;
+margin-bottom:10px;
+
+}
+
+
+/* USER MESSAGE */
+
+.user-msg{
+
+background:#7fa8d8;
+color:white;
+padding:10px;
+border-radius:10px;
+margin:8px;
+max-width:70%;
+margin-left:auto;
+
+}
+
+
+/* BOT MESSAGE */
+
+.bot-msg{
+
+background:#e6eef9;
+padding:10px;
+border-radius:10px;
+margin:8px;
+max-width:70%;
+
+}

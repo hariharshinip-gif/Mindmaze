@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Dashboard</title>
+
+<link rel="stylesheet" href="/static/style.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+
+
+<div class="dashboard">
+
+<h2>Your Mental Health Dashboard</h2>
+
+<p>Track your mental health progress.</p>
+
+
+<a href="/test">
+<button>Take Depression Assessment</button>
+</a>
+
+<a href="/logout" style="float:right">
+<button>Logout</button>
+</a>
+
+
+<br><br>
+
+
+<h3>Depression level</h3>
+
+<canvas id="chart"></canvas>
+
+<!-- MOTIVATION MESSAGE -->
+<h3 id="motivation" style="text-align:center;margin-top:20px;color:#9bd3ff;"></h3>
+
+
+<br><br>
+
+
+<!-- CHATBOT BUTTON -->
+
+<div style="text-align:center">
+
+<img src="/static/bot.png" width="120">
+
+<br><br>
+
+<button onclick="openChat()">
+Talk to Support Assistant
+</button>
+
+</div>
+
+
+<!-- CHAT WINDOW -->
+
+<div id="chatWindow" class="chat-window">
+
+<h3>Support Assistant</h3>
+
+<div id="chatbox"></div>
+
+<input id="userInput" placeholder="Type your message...">
+
+<button onclick="sendMessage()">Send</button>
+
+</div>
+
+
+</div>
+
+
+
+<script>
+
+
+/* PROGRESS CHART */
+
+fetch("/get_progress")
+
+.then(res => res.json())
+
+.then(data => {
+
+let ctx = document.getElementById("chart").getContext("2d")
+
+new Chart(ctx, {
+
+type:"line",
+
+data:{
+labels:data.dates,
+
+datasets:[{
+label:"Mental Health Score",
+data:data.scores,
+borderColor:"#7fa8d8",
+backgroundColor:"rgba(127,168,216,0.2)",
+borderWidth:2,
+tension:0.3
+}]
+}
+
+})
+
+
+/* SHOW MOTIVATION MESSAGE */
+
+if(data.scores.length > 0){
+
+let lastScore = data.scores[data.scores.length - 1]
+
+let message = ""
+
+if(lastScore <= 5){
+message = "😊 You're doing better! Keep taking care of yourself."
+}
+
+else if(lastScore <= 10){
+message = "🌱 You're making progress. Stay strong and keep going."
+}
+
+else{
+message = "💙 I hope you'll feel better soon. Remember you're not alone."
+}
+
+document.getElementById("motivation").innerText = message
+
+}
+
+})
+
+
+
+/* OPEN CHAT */
+
+function openChat(){
+
+document.getElementById("chatWindow").style.display="block"
+
+}
+
+
+
+/* CHATBOT */
+
+function sendMessage(){
+
+let input=document.getElementById("userInput")
+
+let msg=input.value
+
+if(msg=="") return
+
+let chat=document.getElementById("chatbox")
+
+chat.innerHTML += `<div class="user-msg">${msg}</div>`
+
+
+fetch("/chatbot",{
+
+method:"POST",
+
+headers:{"Content-Type":"application/json"},
+
+body:JSON.stringify({message:msg})
+
+})
+
+.then(res=>res.json())
+
+.then(data=>{
+
+chat.innerHTML += `<div class="bot-msg">${data.reply}</div>`
+
+chat.scrollTop=chat.scrollHeight
+
+})
+
+
+input.value=""
+
+}
+
+</script>
+
+
+</body>
+
+</html>
